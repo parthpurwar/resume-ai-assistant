@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Upload, File, X, CheckCircle, AlertCircle, FileText, Image, Music, Video } from "lucide-react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 export default function DocumentUploadPage() {
   const [files, setFiles] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [uploadStatus, setUploadStatus] = useState(null);
+  const [getdata, setgetdata] = useState(null);
+  const navigate = useNavigate();
 
   const getFileIcon = (fileType) => {
     if (fileType.startsWith('image/')) return <Image className="w-8 h-8" />;
@@ -77,6 +81,7 @@ export default function DocumentUploadPage() {
         "Content-Type": "multipart/form-data"
         }
       });
+      setgetdata(response.data);
       setUploadStatus({ type: 'success', message: 'Successfully uploaded' });
       console.log('Files to upload:', files);
     } catch (error) {
@@ -85,7 +90,11 @@ export default function DocumentUploadPage() {
   }
 };
 
-
+  useEffect(() => {
+    if (getdata) {
+      console.log("Updated getData from state:", getdata);
+    }
+  }, [getdata]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-12 px-4">
@@ -226,6 +235,14 @@ export default function DocumentUploadPage() {
               }`}>
                 {uploadStatus.message}
               </p>
+              if(uploadStatus.type === 'success'){
+                <button
+                  onClick={() => navigate('/text-editor', { state: getdata })}
+                  className="ml-auto p-1 hover:bg-green-100 rounded-full transition-colors flex-shrink-0"
+                >
+                  Edit-Text
+                </button>
+              }
             </div>
           )}
         </div>
