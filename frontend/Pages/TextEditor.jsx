@@ -185,6 +185,33 @@ export default function TextEditor() {
             </p>
           </div>
         </div>
+
+        {/*ai helper*/ }
+        <div className="bg-white rounded-2xl shadow-lg p-6 mt-5">
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+              <Type className="w-4 h-4" />
+              Your Content
+            </label>
+            <div className="text-sm text-gray-500 mb-2">
+              Character count: {content.length} | Words: {content.trim().split(/\s+/).filter(w => w).length}
+            </div>
+          </div>
+          
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="w-full h-96 px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none font-mono text-gray-800"
+            placeholder="Start typing your document here..."
+          />
+          
+          <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+            <p className="text-sm text-blue-800">
+              <strong>Tip:</strong> For PDF download, your browser's print dialog will open. 
+              Select "Save as PDF" as the destination to save your document.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

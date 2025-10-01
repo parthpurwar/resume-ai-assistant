@@ -9,6 +9,7 @@ export default function DocumentUploadPage() {
   const [isDragging, setIsDragging] = useState(false);
   const [uploadStatus, setUploadStatus] = useState(null);
   const [getdata, setgetdata] = useState(null);
+  const [getaidata, setgetaidata] = useState(null);
   const navigate = useNavigate();
 
   const getFileIcon = (fileType) => {
@@ -84,6 +85,33 @@ export default function DocumentUploadPage() {
       setgetdata(response.data);
       setUploadStatus({ type: 'success', message: 'Successfully uploaded' });
       console.log('Files to upload:', files);
+    } catch (error) {
+      setUploadStatus({ type: 'error', message: 'Upload failed. Please try again.' });
+      console.error('Upload error:', error);
+  }
+};
+
+
+//aihelp function
+
+const handleai = async () => {
+    if (files.length === 0) {
+      setUploadStatus({ type: 'error', message: 'Please select at least one file' });
+      return;
+    }
+
+    // Simulate upload process
+    setUploadStatus({ type: 'loading', message: 'Uploading files...' });
+    try {
+      const formData = new FormData();
+      files.forEach(file => formData.append('files', file.file));
+      const response = await axios.post('http://localhost:8000/api/edit_resume/', formData, {
+        headers: {
+        "Content-Type": "multipart/form-data"
+        }
+      });
+      setgetaidata(response.data);
+      setUploadStatus({ type: 'success', message: 'Successfully uploaded' });
     } catch (error) {
       setUploadStatus({ type: 'error', message: 'Upload failed. Please try again.' });
       console.error('Upload error:', error);
@@ -235,6 +263,7 @@ export default function DocumentUploadPage() {
               }`}>
                 {uploadStatus.message}
               </p>
+              
               if(uploadStatus.type === 'success'){
                 <button
                   onClick={() => navigate('/text-editor', { state: getdata })}
