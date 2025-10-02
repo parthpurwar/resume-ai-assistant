@@ -111,6 +111,7 @@ const handleai = async () => {
         }
       });
       setgetaidata(response.data);
+      console.log("data_received:", response.data);
       setUploadStatus({ type: 'success', message: 'Successfully uploaded' });
     } catch (error) {
       setUploadStatus({ type: 'error', message: 'Upload failed. Please try again.' });
@@ -249,7 +250,7 @@ const handleai = async () => {
 
           {/* Status Message */}
           {uploadStatus && (
-            <div className={`mt-6 p-4 rounded-lg flex items-center ${
+            <div className={`mt-6 p-4 rounded-lg flex items-center space-x-0 ${
               uploadStatus.type === 'success' ? 'bg-green-50 border border-green-200' :
               uploadStatus.type === 'error' ? 'bg-red-50 border border-red-200' :
               'bg-blue-50 border border-blue-200'
@@ -264,14 +265,21 @@ const handleai = async () => {
                 {uploadStatus.message}
               </p>
               
-              if(uploadStatus.type === 'success'){
+                <div className="flex space-x-2">
                 <button
                   onClick={() => navigate('/text-editor', { state: getdata })}
                   className="ml-auto p-1 hover:bg-green-100 rounded-full transition-colors flex-shrink-0"
                 >
                   Edit-Text
                 </button>
-              }
+                <button
+                  onClick={() => navigate('/ai-editor', { state: getaidata })}
+                  className="ml-auto p-1 hover:bg-green-100 rounded-full transition-colors flex-shrink-0"
+                >
+                  Ai-Help
+                </button>
+                </div>
+              
             </div>
           )}
         </div>

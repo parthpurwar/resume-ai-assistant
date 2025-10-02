@@ -60,9 +60,10 @@ def edit_resume_view(request):
 
     try:
         body = json.loads(request.body)
-        text = body.get("text", "").strip()
-        if not text:
-            return JsonResponse({"error": "No text provided"}, status=400)
+        uploaded_files=request.FILES.getlist('files')
+        if not uploaded_files:
+            return JsonResponse({"error": "No files uploaded"}, status=400)
+        text=extract_text_from_file(uploaded_files[0])
 
         instruction = (
             "You are a helpful resume editor. Improve clarity, grammar, and formatting. "

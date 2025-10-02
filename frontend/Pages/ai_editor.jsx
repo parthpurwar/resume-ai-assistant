@@ -3,12 +3,12 @@ import { Download, FileText, Type, Bold, Italic, List } from 'lucide-react';
 import { useLocation } from "react-router-dom";
 
 
-export default function TextEditor() {
+export default function AiTextEditor() {
     const location = useLocation();
     const uploadData = location.state;
     console.log('Received data:', uploadData);
 
-  const [content, setContent] = useState(uploadData.files[0].text || '');
+  const [content, setContent] = useState(uploadData || '');
 
   const [fileName, setFileName] = useState('my-document');
   const [isBold, setIsBold] = useState(false);
@@ -186,7 +186,7 @@ export default function TextEditor() {
           </div>
         </div>
 
-    
+       
       </div>
     </div>
   );
