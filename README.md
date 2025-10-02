@@ -30,7 +30,7 @@ AI Integration
 
 ⚙️ Setup & Installation
 1️⃣ Clone the Repository
-    git clone https://github.com/yourusername/ai-resume-assistant.git
+    git clone https://github.com/parthpurwar/resume-ai-assistant.git
     cd ai-resume-assistant
 2️⃣ Setup Backend (Django)
     cd backend
