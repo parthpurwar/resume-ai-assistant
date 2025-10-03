@@ -1,83 +1,170 @@
-# resume-ai-assistant
-An intelligent resume-building assistant that helps users upload, edit, and optimize resumes with AI.
-Built with React + TailwindCSS (frontend), Django (backend), FastAPI (data pipeline), and OpenAI API for AI-powered suggestions.
+# AI-Powered Resume Assistant
 
-#Features
-✅ Resume Upload & Storage – Upload your resume in document formats and store securely.
-✅ Document Editor – Edit resumes directly inside the app.
-✅ AI Resume Assistant – Get AI-powered suggestions for improving resumes.
-✅ Job Suggestions – Personalized job recommendations based on resume content.
-✅ Smart Data Handling – FastAPI is used to handle data transfer between React frontend and Django backend.
-✅ Modern UI – Responsive, clean, and fast interface built with TailwindCSS.
+A full-stack intelligent resume optimization platform leveraging OpenAI's GPT-4o-mini and Natural Language Processing for automated resume enhancement and document parsing.
 
 
-🏗️ Tech Stack
-Frontend
-
-⚛️ React (with Hooks & Context API)
-
-🎨 TailwindCSS (modern responsive styling)
-
-Backend
-
-🐍 Django (for user management, authentication, and storage)
-
-⚡ FastAPI (for high-performance communication between frontend and backend)
-
-AI Integration
-
-🤖 OpenAI API (resume improvements, AI assistant, job suggestions)
-
-⚙️ Setup & Installation
-1️⃣ Clone the Repository
-    git clone https://github.com/parthpurwar/resume-ai-assistant.git
-    cd ai-resume-assistant
-2️⃣ Setup Backend (Django)
-    cd backend
-    python -m venv venv
-    source venv/bin/activate   # (Linux/Mac)
-    venv\Scripts\activate      # (Windows)
-    pip install -r requirements.txt
-    python manage.py migrate
-    python manage.py runserver
-
-3️⃣ Setup API Service (FastAPI)
-    cd api
-    uvicorn main:app --reload
-
-4️⃣ Setup Frontend (React + Tailwind)
-    cd frontend
-    npm install
-    npm run dev
-
-🔑 Environment Variables
-
-    Create a .env file inside backend/ and api/ with the following:
-    OPENAI_API_KEY=your_openai_api_key
-
-💡 Usage
-
-    Start Django backend → python manage.py runserver
-
-    Start React frontend → npm run dev
-
-    Open browser at http://localhost:5173
-
-🖼️ Screenshots
-
-### File Upload 
-![Homepage](./screenshots/file_upload.png)  
-
-### Resume Editor  
-![Resume Editor](./screenshots/ai_text_editor.png)  
+## Table of Contents
+- [Final Result](#final-result)
+- [Project Overview](#project-overview)
+- [Technical Stack](#technical-stack)
+- [Key Features](#key-features)
+- [AI/ML Implementation](#aiml-implementation)
+- [Setup Instructions](#setup-instructions)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Future Enhancements](#future-enhancements)
+- [About Author](#about-author)
 
 
-📌 Future Improvements
+## Final Result
+### File Upload Interface
+![File Upload](./screenshots/file_upload.png)
 
-    🔍 AI-powered job matching from LinkedIn/Indeed APIs
+### AI Text Editor
+![AI Text Editor](./screenshots/ai_text_editor.png)
 
-    📝 Cover letter generator
 
-    📊 Resume scoring system
+## Project Overview
 
-    ☁️ Cloud storage integration (AWS/GCP/Azure)
+Full-stack application demonstrating practical Generative AI integration for resume optimization. Built to showcase expertise in AI/ML integration, full-stack development, and modern web technologies.
+
+## Technical Stack
+
+**Backend**: Django 5.2.6, Django REST Framework, OpenAI GPT-4o-mini API, PyPDF2, python-docx, SQLite/PostgreSQL, django-cors-headers, python-dotenv
+
+**Frontend**: React 19.1.1, Vite 7.1.7, TailwindCSS 4.1.13, React Router DOM, Axios, Lucide React, ESLint
+
+**AI/ML**: OpenAI GPT-4o-mini, Prompt Engineering, Document Processing (PDF/DOCX/TXT), NLP-based text enhancement
+
+## Key Features
+
+**Intelligent Document Processing**
+- Multi-format resume upload (PDF, DOCX, TXT) with drag-and-drop interface
+- Automated text extraction using PyPDF2 and python-docx
+- Real-time file validation and metadata tracking
+
+**AI-Powered Enhancement**
+- OpenAI GPT-4o-mini integration for resume optimization
+- Advanced prompt engineering for professional content generation
+- Grammar correction, formatting improvements, and clarity enhancement
+- Comprehensive error handling (RateLimitError, APIError, ConnectionError)
+
+**Real-Time Editor**
+- In-browser editing with live character/word count
+- Multiple export formats: PDF, TXT, HTML, Markdown
+- Responsive design for cross-device compatibility
+
+**Modern UI/UX**
+- Beautiful landing page with animated gradients
+- Intuitive upload interface with visual feedback
+- Mobile-first responsive design using TailwindCSS
+
+## AI/ML Implementation
+
+### Generative AI Pipeline
+
+1. **Document Ingestion**: Multi-format parser extracts text while preserving structure
+2. **Prompt Engineering**: Custom prompts guide LLM to produce professional resume content
+3. **API Integration**: OpenAI API calls with `gpt-4o-mini` model (1200 max tokens)
+4. **Error Handling**: Comprehensive exception handling for production reliability
+
+### API Endpoints
+```
+POST /api/resume_upload/  - Upload and extract text from resume files
+POST /api/edit_resume/    - AI-powered resume enhancement
+```
+
+## Setup Instructions
+
+### Prerequisites
+- Python 3.10+
+- Node.js 18+
+- OpenAI API Key from https://platform.openai.com
+
+### Backend Setup
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+pip install django==5.2.6 djangorestframework djangorestframework-simplejwt
+pip install django-cors-headers python-dotenv openai PyPDF2 python-docx
+
+python manage.py migrate
+python manage.py runserver  # Runs on http://localhost:8000
+```
+
+### Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev  # Runs on http://localhost:5173
+```
+
+### Environment Configuration
+Create `.env` in `backend/` directory:
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+## Usage
+
+1. **Start servers**: Run backend (`python manage.py runserver`) and frontend (`npm run dev`)
+2. **Upload resume**: Navigate to Documents page, drag-and-drop or browse for file (PDF/DOCX/TXT)
+3. **Edit**: Click "Edit-Text" for manual editing or "Ai-Help" for AI-powered enhancement
+4. **Download**: Export in preferred format (PDF, TXT, HTML, MD)
+
+## Project Structure
+```
+resume-ai-assistant/
+├── backend/
+│   ├── backend/          # Django settings, URLs, WSGI
+│   ├── resumes/          # Resume processing (models, views, URLs)
+│   ├── users/            # User management (future)
+│   └── manage.py
+├── frontend/
+│   ├── Pages/            # Home, DocumentUpload, TextEditor, ai_editor
+│   ├── src/              # App.jsx, main.jsx, styles
+│   └── vite.config.js
+└── screenshots/
+```
+
+## Future Enhancements
+
+**AI/ML Features**
+- ATS compatibility scoring using NLP metrics
+- Job description matching with semantic similarity
+- Domain-specific fine-tuning (tech, healthcare, finance)
+- Multi-language support and skills gap analysis
+
+**Platform Features**
+- User authentication and profile management
+- Resume version control and history
+- Cover letter generation with GPT-4
+- Interview preparation assistance
+- Job application tracking dashboard
+
+**Infrastructure**
+- Microservices architecture with FastAPI for AI processing
+- Cloud deployment (AWS, GCP, Azure)
+- Redis caching for API responses
+- Celery for async background processing
+- CI/CD pipeline and comprehensive test suite
+
+## About Author
+
+Developed by **Parth**, 3rd-year Computer Science student at **IIT (BHU) Varanasi**, specializing in Artificial Intelligence and Full-Stack Development.
+
+**Key Skills Demonstrated**:
+- Large Language Model (LLM) integration in production applications
+- Full-stack web development with Python (Django) and Javascript (React)
+- Prompt engineering and NLP document processing
+- RESTful API design and error handling
+- Scalable architecture and software engineering best practices
+
+This project showcases practical expertise in leveraging Generative AI technologies to solve real-world problems with clean, maintainable code.
+
+
+---
+
+**Keywords**: Generative AI, Large Language Models, OpenAI GPT-4, Natural Language Processing, Full-Stack Development, Django, React, REST API, Machine Learning, Document Processing, AI Integration, Software Engineering, Python, JavaScript, TailwindCSS, Prompt Engineering, Resume Optimization, ATS
