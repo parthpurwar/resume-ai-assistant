@@ -1,6 +1,6 @@
 # AI-Powered Resume Assistant
 
-A full-stack intelligent resume optimization platform leveraging OpenAI's GPT-4o-mini and Natural Language Processing for automated resume enhancement and document parsing.
+A full-stack intelligent resume optimization platform leveraging OpenAI's API and Natural Language Processing for automated resume enhancement and document parsing.
 
 
 ## Table of Contents
