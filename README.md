@@ -87,11 +87,11 @@ cd backend
 python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
-pip install django==5.2.6 djangorestframework djangorestframework-simplejwt
-pip install django-cors-headers python-dotenv openai PyPDF2 python-docx
+pip3 install django==5.2.6 djangorestframework djangorestframework-simplejwt
+pip3 install django-cors-headers python-dotenv openai PyPDF2 python-docx
 
-python manage.py migrate
-python manage.py runserver  # Runs on http://localhost:8000
+python3 manage.py migrate
+python3 manage.py runserver  # Runs on http://localhost:8000
 ```
 
 ### Frontend Setup
