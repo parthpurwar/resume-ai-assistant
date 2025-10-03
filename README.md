@@ -84,7 +84,7 @@ POST /api/edit_resume/    - AI-powered resume enhancement
 ### Backend Setup
 ```bash
 cd backend
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
 pip install django==5.2.6 djangorestframework djangorestframework-simplejwt
