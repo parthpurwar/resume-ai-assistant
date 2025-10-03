@@ -81,7 +81,14 @@ POST /api/edit_resume/    - AI-powered resume enhancement
 - Node.js 18+
 - OpenAI API Key from https://platform.openai.com
 
+
 ### Backend Setup
+
+Create `.env` in `backend/` directory:
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
 ```bash
 cd backend
 python3 -m venv venv
@@ -101,11 +108,7 @@ npm install
 npm run dev  # Runs on http://localhost:5173
 ```
 
-### Environment Configuration
-Create `.env` in `backend/` directory:
-```env
-OPENAI_API_KEY=your_openai_api_key_here
-```
+
 
 ## Usage
 
